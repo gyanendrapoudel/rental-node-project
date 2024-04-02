@@ -8,10 +8,13 @@ dotenv.config();
 const Genre = require('./model/genre.js')
 
 
+// middleware to parse json body
+app.use(express.json())
+
+
 // router
 app.use('/',home)
 app.use('/api/genres',genre)
-
 
 // database connection
 const url = process.env.URl;
@@ -24,7 +27,7 @@ mongoose.connect(url)
 
 app.listen(3000, console.log('port is listening on 3000'))
 
-createGenre();
+// createGenre();
 
 // create a genre  function
 
