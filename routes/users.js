@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const User = require('../model/user.js')
+const _ = require('lodash')
 
 //get all users
 router.get('/', async (req, res) => {
@@ -20,7 +21,7 @@ router.post('/', async (req, res) => {
     password
   })
  await user.save()
-  res.send({})
+  res.send(_.pick(user,['_id','name','email']));
 })
 
 //  get one user
