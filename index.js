@@ -1,7 +1,8 @@
 const express =require('express');
 const app = express();
 const home = require('./routes/home.js')
-const genre = require('./routes/genres.js');
+const genre = require('./routes/genres.js')
+const user = require('./routes/users.js');
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 dotenv.config();
@@ -14,7 +15,8 @@ app.use(express.json())
 
 // router
 app.use('/',home)
-app.use('/api/genres',genre)
+app.use('/api/genres', genre)
+app.use('/api/users',user)
 
 // database connection
 const url = process.env.URl;

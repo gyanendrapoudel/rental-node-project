@@ -9,11 +9,10 @@ const userSchema = new mongoose.Schema({
     },
     email:{
         type:String,
-        unique:true,
-        required:true,
+        
         minlenght:5,
         maxlength:255,
-        pattern: /.*@.*/,
+        
     },
     password :{
         type:String,
@@ -23,4 +22,4 @@ const userSchema = new mongoose.Schema({
 })
 const User = mongoose.model('User',userSchema)
 
-module.export = User
+module.exports = User

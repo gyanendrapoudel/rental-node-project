@@ -44,7 +44,6 @@ router.patch('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   const id = req.params.id
   const genre = await Genre.findOneAndDelete(id);
-  console.log(genre);
   res.send(genre)
   
 })
