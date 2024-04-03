@@ -3,9 +3,8 @@ const router = express.Router()
 const User = require('../model/user.js')
 const _ = require('lodash')
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
-const dotenv = require('dotenv')
-dotenv.config()
+
+
 
 
 router.post('/', async (req, res) => {
@@ -17,7 +16,7 @@ router.post('/', async (req, res) => {
   
   if (!validatePassword) return res.status(400).send('Invalid email or password ')
   
-  const token = jwt.sign({ _id: existingUser._id }, process.env.jwtPrivateKey)
+  const token = existingUser.generateAuthToken();
   res.send(token);
 })
 module.exports = router

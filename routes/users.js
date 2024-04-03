@@ -3,9 +3,8 @@ const router = express.Router()
 const User = require('../model/user.js')
 const _ = require('lodash')
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
-const dotenv = require('dotenv')
-dotenv.config()
+
+
 
 //get all users
 router.get('/', async (req, res) => {
@@ -28,8 +27,8 @@ router.post('/', async (req, res) => {
   user.password = await bcrypt.hash(user.password,salt);
   
  await user.save()
- const token = jwt.sign({_id:user._id}, process.env.jwtPrivateKey)
-  res.header('x-auth-toke',token).send(_.pick(user,['_id','name','email']));
+const token = user.generateAuthToken()
+  res.header('x-auth-token',token).send(_.pick(user,['_id','name','email']));
 })
 
 //  get one user
