@@ -9,9 +9,12 @@ const dotenv = require('dotenv')
 dotenv.config();
 const Genre = require('./model/genre.js')
 
-
-// middleware to parse json body
-app.use(express.json())
+ if (!process.env.jwtPrivateKey){
+    console.log('Fatal ERROR: jwtPrivateKEy is not defined')
+    process.exit(1)
+ }
+   // middleware to parse json body
+   app.use(express.json())
 
 
 // router
