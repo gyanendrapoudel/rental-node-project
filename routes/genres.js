@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router();
 const Genre = require('../model/genre');
+const auth = require('../middleware/auth')
 
 
 //get all genres
@@ -10,7 +11,7 @@ router.get('/', async(req,res)=>{
     res.send(genres);
 })
 // create one genre
-router.post('/', async(req, res) => {
+router.post('/',auth,async(req, res) => {
  const {name} =  req.body
  if(!name) return res.status(404).send('bad request')
  const genre = new Genre({
