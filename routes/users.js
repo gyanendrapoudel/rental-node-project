@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const User = require('../model/user.js')
 const _ = require('lodash')
+const bcrypt = require('bcrypt')
 
 //get all users
 router.get('/', async (req, res) => {
@@ -20,6 +21,9 @@ router.post('/', async (req, res) => {
     email,
     password
   })
+  const salt = await bcrypt.genSalt(10);
+  user.password = await bcrypt.hash(user.password,salt);
+  console.log(user);
  await user.save()
   res.send(_.pick(user,['_id','name','email']));
 })
