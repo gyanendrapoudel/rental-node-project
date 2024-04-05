@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router();
 const Genre = require('../model/genre');
 const auth = require('../middleware/auth')
+const admin = require('../middleware/admin.js')
+
 
 
 //get all genres
@@ -42,7 +44,7 @@ router.patch('/:id', async (req, res) => {
 })
 
 // delete one genre
-router.delete('/:id', async (req, res) => {
+router.delete('/:id',[auth,admin], async (req, res) => {
   const id = req.params.id
   const genre = await Genre.findOneAndDelete(id);
   res.send(genre)
